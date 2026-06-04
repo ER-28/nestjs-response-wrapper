@@ -20,16 +20,18 @@ export class ResponseWrapperModule {
     };
   }
 
-  static forRootAsync(options: any): DynamicModule {
-    // Basic implementation of async configuration
+  static forRootAsync(options: {
+    useFactory: (...args: any[]) => Promise<WrapperOptions> | WrapperOptions;
+    inject?: any[];
+  }): DynamicModule {
     return {
       module: ResponseWrapperModule,
       global: true,
       providers: [
         {
           provide: RESPONSE_WRAPPER_OPTIONS,
-          useFactory: options.useFactory,
           inject: options.inject || [],
+          useFactory: options.useFactory,
         },
       ],
       exports: [RESPONSE_WRAPPER_OPTIONS],

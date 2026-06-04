@@ -6,10 +6,18 @@ import {
   Inject,
   Injectable,
 } from '@nestjs/common';
-
 import { RESPONSE_WRAPPER_OPTIONS } from '../response-wrapper.module';
 import { WrapperOptions } from '../interfaces/wrapper-options.interface';
 import { StandardResponse } from '../interfaces/response.interface';
+
+const ERROR_CODE_MAP: Record<number, string> = {
+  [HttpStatus.BAD_REQUEST]: 'VALIDATION_ERROR',
+  [HttpStatus.UNAUTHORIZED]: 'UNAUTHORIZED_ACCESS',
+  [HttpStatus.FORBIDDEN]: 'FORBIDDEN_ACCESS',
+  [HttpStatus.NOT_FOUND]: 'RESOURCE_NOT_FOUND',
+  [HttpStatus.CONFLICT]: 'CONFLICT_ERROR',
+  [HttpStatus.INTERNAL_SERVER_ERROR]: 'INTERNAL_SERVER_ERROR',
+};
 
 @Injectable()
 export class ResponseExceptionFilter implements ExceptionFilter {
@@ -39,6 +47,8 @@ export class ResponseExceptionFilter implements ExceptionFilter {
       ? (errorResponse as any).details || null 
       : null;
 
+    const errorCode = (errorResponse as any).code || ERROR_CODE_MAP[statusCode] || 'INTERNAL_SERVER_ERROR';
+
     const standardResponse: StandardResponse = {
       success: false,
       data: null,
@@ -49,7 +59,7 @@ export class ResponseExceptionFilter implements ExceptionFilter {
         version: this.options.version,
       },
       error: {
-        code: (errorResponse as any).code || 'INTERNAL_SERVER_ERROR',
+        code: errorCode,
         message: message,
         details: details,
       },
@@ -58,6 +68,11 @@ export class ResponseExceptionFilter implements ExceptionFilter {
     if (this.options.debug) {
       standardResponse.meta.stack = exception.stack;
     }
+
+    response.status(statusCode).json(standardResponse);
+  }
+}
+
 
     response.status(statusCode).json(standardResponse);
   }
