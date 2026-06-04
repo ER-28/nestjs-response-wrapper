@@ -4,7 +4,7 @@ import {
   StandardResponse,
 } from "../interfaces/response.interface";
 import { WrapperOptions } from "../interfaces/wrapper-options.interface";
-import { RESPONSE_WRAPPER_OPTIONS } from "../response-wrapper.module";
+import { RESPONSE_WRAPPER_OPTIONS } from "../constants";
 
 @Injectable()
 export class ResponseService {
