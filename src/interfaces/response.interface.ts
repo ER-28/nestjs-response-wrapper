@@ -4,6 +4,8 @@ export interface ResponseMeta {
   statusCode: number;
   version?: string;
   pagination?: PaginationMeta;
+  debugInfo?: any;
+  stack?: string;
   [key: string]: any;
 }
 

@@ -1,5 +1,5 @@
 import { Module, DynamicModule, Global, Provider } from '@nestjs/common';
-import { WrapperOptions } from './interfaces/wrapper-options.interface.ts';
+import { WrapperOptions } from './interfaces/wrapper-options.interface';
 
 export const RESPONSE_WRAPPER_OPTIONS = 'RESPONSE_WRAPPER_OPTIONS';
 
