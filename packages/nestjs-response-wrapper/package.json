@@ -4,6 +4,28 @@
   "description": "A professional response standardization library for NestJS",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/er28/nestjs-response-wrapper.git",
+    "directory": "packages/nestjs-response-wrapper"
+  },
+  "bugs": {
+    "url": "https://github.com/er28/nestjs-response-wrapper/issues"
+  },
+  "homepage": "https://github.com/er28/nestjs-response-wrapper#readme",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
@@ -12,13 +34,20 @@
     "format": "biome format . --write",
     "check": "biome check .",
     "test": "jest",
-    "test:cov": "jest --coverage"
+    "test:cov": "jest --coverage",
+    "prepublishOnly": "pnpm run build && pnpm run test"
   },
   "keywords": [
     "nestjs",
     "response",
     "wrapper",
-    "api"
+    "api",
+    "standard-response",
+    "interceptor",
+    "exception-filter",
+    "pagination",
+    "typescript",
+    "rest-api"
   ],
   "author": "",
   "license": "MIT",

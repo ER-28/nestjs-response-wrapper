@@ -12,22 +12,29 @@ jobs:
         with:
           node-version: "22.14.0"
           cache: pnpm
-      - run: pnpm i
+      - run: pnpm install --frozen-lockfile
       - run: pnpm run lint
       - run: pnpm run build
+      - run: pnpm run test
 
   publish:
     needs: build-and-test
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/nestjs-response-wrapper
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm ci
-      - run: npm run build
-      - run: npm publish
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build
+      - run: pnpm run test
+      - run: pnpm publish --no-git-checks --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
