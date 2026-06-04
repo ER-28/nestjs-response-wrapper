@@ -1,3 +1,5 @@
+import { PaginationMeta } from "./pagination.interface";
+
 export interface ResponseMeta {
   timestamp: string;
   path: string;
@@ -20,12 +22,4 @@ export interface StandardResponse<T = any> {
   data: T | null;
   meta: ResponseMeta;
   error: ResponseError | null;
-}
-
-export interface PaginationMeta {
-  totalItems: number;
-  itemCount: number;
-  itemsPerPage: number;
-  totalPages: number;
-  currentPage: number;
 }

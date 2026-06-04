@@ -10,7 +10,9 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { RESPONSE_WRAPPER_OPTIONS } from '../response-wrapper.module';
 import { WrapperOptions } from '../interfaces/wrapper-options.interface';
-import { StandardResponse } from '../interfaces/response.interface';
+import { ResponseMeta, StandardResponse } from '../interfaces/response.interface';
+
+
 import { SKIP_RESPONSE_WRAPPER_KEY } from '../decorators/skip-response-wrapper.decorator';
 
 @Injectable()
@@ -47,7 +49,7 @@ export class ResponseInterceptor implements NestInterceptor {
     const statusCode = response.statusCode;
     const request = context.switchToHttp().getRequest();
 
-    const meta = {
+    const meta: ResponseMeta = {
       timestamp: new Date().toISOString(),
       path: request.url,
       statusCode: statusCode,
