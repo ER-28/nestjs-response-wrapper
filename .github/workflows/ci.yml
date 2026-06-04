@@ -8,9 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v6
-        with:
-          node-version: '20'
-          cache: 'npm'
       - run: pnpm i
       - run: pnpm run lint
       - run: pnpm run build
