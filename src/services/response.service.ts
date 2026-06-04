@@ -24,7 +24,7 @@ export class ResponseService {
       success: true,
       data,
       meta: {
-        ...this.createMeta('/unknown', 200), // Default, will be overwritten by interceptor usually
+        ...this.createMeta('/unknown', 200),
         ...meta,
       },
       error: null,
