@@ -1,7 +1,10 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { RESPONSE_WRAPPER_OPTIONS } from '../response-wrapper.module';
-import { WrapperOptions } from '../interfaces/wrapper-options.interface';
-import { StandardResponse, ResponseMeta } from '../interfaces/response.interface';
+import { Inject, Injectable } from "@nestjs/common";
+import {
+  ResponseMeta,
+  StandardResponse,
+} from "../interfaces/response.interface";
+import { WrapperOptions } from "../interfaces/wrapper-options.interface";
+import { RESPONSE_WRAPPER_OPTIONS } from "../response-wrapper.module";
 
 @Injectable()
 export class ResponseService {
@@ -24,7 +27,7 @@ export class ResponseService {
       success: true,
       data,
       meta: {
-        ...this.createMeta('/unknown', 200),
+        ...this.createMeta("/unknown", 200),
         ...meta,
       },
       error: null,

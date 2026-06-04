@@ -1,5 +1,5 @@
 {
-  "name": "nestjs-response-wrapper",
+  "name": "nestjs-response-wrapper-workspace",
   "private": true,
   "scripts": {
     "build": "turbo run build",

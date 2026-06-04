@@ -1,7 +1,7 @@
-import { Module, DynamicModule, Global, Provider } from '@nestjs/common';
-import { WrapperOptions } from './interfaces/wrapper-options.interface';
+import { DynamicModule, Global, Module } from "@nestjs/common";
+import { WrapperOptions } from "./interfaces/wrapper-options.interface";
 
-export const RESPONSE_WRAPPER_OPTIONS = 'RESPONSE_WRAPPER_OPTIONS';
+export const RESPONSE_WRAPPER_OPTIONS = "RESPONSE_WRAPPER_OPTIONS";
 
 @Global()
 @Module({})

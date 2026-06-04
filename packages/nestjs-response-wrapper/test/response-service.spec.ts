@@ -1,9 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { ResponseWrapperModule } from '../src/response-wrapper.module';
-import { RESPONSE_WRAPPER_OPTIONS } from '../src/response-wrapper.module';
-import { ResponseService } from '../src/services/response.service';
+import { Test, TestingModule } from "@nestjs/testing";
+import { ResponseWrapperModule } from "../src/response-wrapper.module";
+import { ResponseService } from "../src/services/response.service";
 
-describe('ResponseService', () => {
+describe("ResponseService", () => {
   let service: ResponseService;
 
   beforeEach(async () => {
@@ -13,7 +12,7 @@ describe('ResponseService', () => {
           enableGlobalInterceptor: true,
           includeMeta: true,
           debug: false,
-          version: '1.0.0',
+          version: "1.0.0",
           excludeRoutes: [],
         }),
       ],
@@ -23,12 +22,12 @@ describe('ResponseService', () => {
     service = module.get<ResponseService>(ResponseService);
   });
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(service).toBeDefined();
   });
 
-  it('should create a standard success response', () => {
-    const data = { id: 1, name: 'Test' };
+  it("should create a standard success response", () => {
+    const data = { id: 1, name: "Test" };
     const result = service.wrapSuccess(data);
 
     expect(result.success).toBe(true);
@@ -37,8 +36,8 @@ describe('ResponseService', () => {
     expect(result.meta).toBeDefined();
   });
 
-  it('should include the version in meta', () => {
+  it("should include the version in meta", () => {
     const result = service.wrapSuccess({});
-    expect(result.meta.version).toBe('1.0.0');
+    expect(result.meta.version).toBe("1.0.0");
   });
 });

@@ -1,6 +1,6 @@
 export const formatPagination = (data: any) => {
-  if (!data || typeof data !== 'object') return null;
-  
+  if (!data || typeof data !== "object") return null;
+
   const total = data.total ?? data.totalItems ?? data.count;
   const limit = data.limit ?? data.pageSize ?? data.itemsPerPage;
   const page = data.page ?? data.currentPage ?? 1;
@@ -17,16 +17,16 @@ export const formatPagination = (data: any) => {
 };
 
 export const isBinaryResponse = (response: any): boolean => {
-  const contentType = response.getHeader('content-type');
+  const contentType = response.getHeader("content-type");
   if (!contentType) return false;
 
   const binaryTypes = [
-    'application/octet-stream',
-    'application/pdf',
-    'application/zip',
-    'image/',
-    'video/',
-    'audio/',
+    "application/octet-stream",
+    "application/pdf",
+    "application/zip",
+    "image/",
+    "video/",
+    "audio/",
   ];
 
   return binaryTypes.some((type) => contentType.includes(type));

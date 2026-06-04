@@ -1,18 +1,21 @@
 import {
+  CallHandler,
+  ExecutionContext,
+  Inject,
   Injectable,
   NestInterceptor,
-  ExecutionContext,
-  CallHandler,
-  Inject,
-} from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { RESPONSE_WRAPPER_OPTIONS } from '../response-wrapper.module';
-import { WrapperOptions } from '../interfaces/wrapper-options.interface';
-import { ResponseMeta, StandardResponse } from '../interfaces/response.interface';
-import { SKIP_RESPONSE_WRAPPER_KEY } from '../decorators/skip-response-wrapper.decorator';
-import { isBinaryResponse, formatPagination } from '../utils/response.util';
+} from "@nestjs/common";
+import { Reflector } from "@nestjs/core";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { SKIP_RESPONSE_WRAPPER_KEY } from "../decorators/skip-response-wrapper.decorator";
+import {
+  ResponseMeta,
+  StandardResponse,
+} from "../interfaces/response.interface";
+import { WrapperOptions } from "../interfaces/wrapper-options.interface";
+import { RESPONSE_WRAPPER_OPTIONS } from "../response-wrapper.module";
+import { formatPagination, isBinaryResponse } from "../utils/response.util";
 
 @Injectable()
 export class ResponseInterceptor implements NestInterceptor {
@@ -43,9 +46,7 @@ export class ResponseInterceptor implements NestInterceptor {
       return next.handle();
     }
 
-    return next.handle().pipe(
-      map((data) => this.wrapResponse(data, context)),
-    );
+    return next.handle().pipe(map((data) => this.wrapResponse(data, context)));
   }
 
   private wrapResponse(data: any, context: ExecutionContext): StandardResponse {
@@ -53,10 +54,10 @@ export class ResponseInterceptor implements NestInterceptor {
     const statusCode = response.statusCode;
     const request = context.switchToHttp().getRequest();
 
-    let pagination = null;
+    let pagination: any;
     let responseData = data;
 
-    if (data && typeof data === 'object') {
+    if (data && typeof data === "object") {
       pagination = formatPagination(data);
       if (pagination) {
         responseData = data.items || data.data || data;
@@ -80,46 +81,6 @@ export class ResponseInterceptor implements NestInterceptor {
     return {
       success: true,
       data: responseData,
-      meta,
-      error: null,
-    };
-  }
-}
-
-
-    const request = context.switchToHttp().getRequest();
-    const { url } = request;
-
-    if (this.options.excludeRoutes.some((route) => url.includes(route))) {
-      return next.handle();
-    }
-
-    return next.handle().pipe(
-      map((data) => this.wrapResponse(data, context)),
-    );
-  }
-
-  private wrapResponse(data: any, context: ExecutionContext): StandardResponse {
-    const response = context.switchToHttp().getResponse();
-    const statusCode = response.statusCode;
-    const request = context.switchToHttp().getRequest();
-
-    const meta: ResponseMeta = {
-      timestamp: new Date().toISOString(),
-      path: request.url,
-      statusCode: statusCode,
-      version: this.options.version,
-    };
-
-    if (this.options.debug) {
-      meta.debugInfo = {
-        memoryUsage: process.memoryUsage(),
-      };
-    }
-
-    return {
-      success: true,
-      data,
       meta,
       error: null,
     };
