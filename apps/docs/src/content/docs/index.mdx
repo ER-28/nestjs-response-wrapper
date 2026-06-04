@@ -1,0 +1,34 @@
+---
+title: nestjs-response-wrapper
+description: A professional response standardization library for NestJS
+template: splash
+hero:
+  tagline: Standardize your NestJS API responses with a single module. Automatic wrapping, exception handling, and pagination support.
+  actions:
+    - text: Get Started
+      link: /getting-started/introduction/
+      icon: right-arrow
+    - text: View on GitHub
+      link: https://github.com/example/nestjs-response-wrapper
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Features
+
+<CardGrid stagger>
+	<Card title="Zero-config Setup" icon="add-document">
+		Register one module and get standardized responses across your entire API.
+	</Card>
+	<Card title="Exception Handling" icon="warning">
+		Automatically wraps errors into a consistent error response format.
+	</Card>
+	<Card title="Pagination Support" icon="list">
+		Auto-detects and formats pagination metadata from your response data.
+	</Card>
+	<Card title="Binary Passthrough" icon="document">
+		Skips wrapping for binary responses like files, images, and streams.
+	</Card>
+</CardGrid>
