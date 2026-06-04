@@ -1,25 +1,21 @@
 {
-  "name": "nestjs-response-wrapper",
-  "version": "1.0.0",
-  "description": "A professional response standardization library for NestJS",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "name": "nestjs-response-wrapper-workspace",
+  "private": true,
   "scripts": {
-    "build": "tsc",
-    "start": "npm run build && node dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": ["nestjs", "response", "wrapper", "api"],
-  "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "@nestjs/common": "^11.1.24",
-    "@nestjs/core": "^11.1.24",
-    "rxjs": "^7.8.2"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types",
+    "test": "turbo run test"
   },
   "devDependencies": {
-    "@types/node": "^22.0.0",
-    "ts-node": "^10.9.0",
-    "typescript": "^5.0.0"
+    "prettier": "^3.7.4",
+    "turbo": "^2.9.16",
+    "typescript": "5.9.2"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18"
   }
 }

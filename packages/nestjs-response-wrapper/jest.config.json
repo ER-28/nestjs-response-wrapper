@@ -1,0 +1,15 @@
+{
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "coverageDirectory": "coverage",
+  "collectCoverageFrom": ["src/**/*.ts", "!src/**/*.interface.ts"],
+  "transform": {
+    "^.+\\.ts$": [
+      "ts-jest",
+      {
+        "tsconfig": "tsconfig.spec.json"
+      }
+    ]
+  }
+}
