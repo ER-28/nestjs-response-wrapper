@@ -4,14 +4,14 @@ import starlight from '@astrojs/starlight';
 import starlightThemeRapide from 'starlight-theme-rapide'
 
 export default defineConfig({
-	site: 'https://er28.github.io',
+	site: 'https://er-28.github.io',
 	base: '/nestjs-response-wrapper',
 	integrations: [
 		starlight({
 			plugins: [starlightThemeRapide()],
 			title: 'NestJS Response Wrapper',
 			description: 'A professional response standardization library for NestJS',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/example/nestjs-response-wrapper' }],
+			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/ER-28/nestjs-response-wrapper' }],
 			sidebar: [
 				{
 					label: 'Getting Started',
