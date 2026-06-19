@@ -8,9 +8,9 @@ A professional response standardization library for NestJS.
 ## Install
 
 ```bash
-npm install nestjs-response-wrapper
-pnpm add nestjs-response-wrapper
-yarn add nestjs-response-wrapper
+npm install @reysin/nestjs-response-wrapper
+pnpm add @reysin/nestjs-response-wrapper
+yarn add @reysin/nestjs-response-wrapper
 ```
 
 ## Quick Start

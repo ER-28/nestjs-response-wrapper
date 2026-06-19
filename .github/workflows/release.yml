@@ -12,6 +12,7 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment: release
     defaults:
       run:
         working-directory: packages/nestjs-response-wrapper
@@ -42,6 +43,7 @@ jobs:
       - name: Publish to GitHub Package Registry
         run: |
           npm pkg set name="@reysin/nestjs-response-wrapper"
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
           pnpm publish --no-git-checks --access public --registry https://npm.pkg.github.com
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
