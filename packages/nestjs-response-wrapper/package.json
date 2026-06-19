@@ -1,5 +1,5 @@
 {
-  "name": "nestjs-response-wrapper",
+  "name": "@reysin/nestjs-response-wrapper",
   "version": "1.0.0",
   "description": "A professional response standardization library for NestJS",
   "main": "dist/index.js",

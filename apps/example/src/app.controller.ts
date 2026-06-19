@@ -1,6 +1,6 @@
 import { Controller, Get, Query, HttpException, HttpStatus } from '@nestjs/common';
 import { AppService } from './app.service';
-import { SkipResponseWrapper } from 'nestjs-response-wrapper';
+import { SkipResponseWrapper } from '@reysin/nestjs-response-wrapper';
 
 @Controller()
 export class AppController {

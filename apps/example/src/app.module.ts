@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ResponseWrapperModule } from 'nestjs-response-wrapper';
+import { ResponseWrapperModule } from '@reysin/nestjs-response-wrapper';
 
 @Module({
   imports: [

@@ -24,7 +24,7 @@
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/swagger": "^7.0.0",
-    "nestjs-response-wrapper": "workspace:*",
+    "@reysin/nestjs-response-wrapper": "workspace:*",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1"
   },
