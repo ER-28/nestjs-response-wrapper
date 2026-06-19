@@ -41,7 +41,7 @@ jobs:
 
       - name: Publish to GitHub Package Registry
         run: |
-          npm pkg set name="@er-28/nestjs-response-wrapper"
+          npm pkg set name="@reysin/nestjs-response-wrapper"
           pnpm publish --no-git-checks --access public --registry https://npm.pkg.github.com
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
