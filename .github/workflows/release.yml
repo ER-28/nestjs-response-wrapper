@@ -1,30 +1,21 @@
 name: Release
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: "Version bump type"
-        required: true
-        type: choice
-        options:
-          - patch
-          - minor
-          - major
+  release:
+    types: [published]
 
 permissions:
-  contents: write
+  contents: read
+  packages: write
 
 jobs:
-  release:
+  publish:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: packages/nestjs-response-wrapper
     steps:
       - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: pnpm/action-setup@v6
 
@@ -39,26 +30,12 @@ jobs:
       - name: Run tests
         run: pnpm run test
 
-      - name: Configure git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Bump version
-        run: npm version ${{ inputs.version }} --no-git-tag-version
-
-      - name: Read new version
+      - name: Extract version from tag
         id: version
-        run: echo "value=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+        run: echo "value=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
 
-      - name: Commit and tag
-        run: |
-          git add .
-          git commit -m "chore: release v${{ steps.version.outputs.value }}"
-          git tag "v${{ steps.version.outputs.value }}"
-
-      - name: Push
-        run: git push && git push --tags
+      - name: Set version in package.json
+        run: npm version ${{ steps.version.outputs.value }} --no-git-tag-version
 
       - name: Build
         run: pnpm run build
@@ -68,9 +45,9 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: "v${{ steps.version.outputs.value }}"
-          name: "v${{ steps.version.outputs.value }}"
-          generate_release_notes: true
+      - name: Publish to GitHub Package Registry
+        run: |
+          npm pkg set name="@er-28/nestjs-response-wrapper"
+          pnpm publish --no-git-checks --access public --registry https://npm.pkg.github.com
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
